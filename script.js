@@ -54,7 +54,7 @@ function sendResponseEmail(answer) {
     from_name: "Shileibi",
     message: `She clicked: ${answer}`,
     reply_to: "luwangambawahengbam2006@gmail.com"
-  }, "Luwang");
+  }, "luwang0017");
 }
 
 document.getElementById('yesBtn').addEventListener('click', () => {
@@ -206,6 +206,6 @@ document.head.appendChild(style);
 const emailjsScript = document.createElement('script');
 emailjsScript.src = 'https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js';
 emailjsScript.onload = () => {
-  emailjs.init("Luwangamba"); // Replace with your actual user ID from EmailJS
+  emailjs.init("luwang0017"); // Replace with your actual user ID from EmailJS
 };
 document.body.appendChild(emailjsScript);
