@@ -1,5 +1,8 @@
+// script.js
+
 // Scroll fade-in effect
 const faders = document.querySelectorAll('.fade-in');
+
 const appearOptions = {
   threshold: 0,
   rootMargin: '0px 0px -100px 0px'
@@ -45,7 +48,6 @@ questionBox.innerHTML = `
 `;
 document.body.appendChild(questionBox);
 
-// Function to send the response email via EmailJS
 function sendResponseEmail(answer) {
   const templateParams = {
     to_name: "Luwangamba",
@@ -54,6 +56,7 @@ function sendResponseEmail(answer) {
     reply_to: "luwangambawahengbam2006@gmail.com"
   };
 
+  // Corrected EmailJS send method with template ID and service ID
   emailjs.send("Luwangamba0017", "template_ukecxrm", templateParams)
     .then(() => {
       console.log("Email sent ✅");
@@ -62,7 +65,6 @@ function sendResponseEmail(answer) {
     });
 }
 
-// Event listener for "Yes" button
 document.getElementById('yesBtn').addEventListener('click', () => {
   sendResponseEmail("Yes");
   document.querySelector('.response').innerHTML = `
@@ -80,7 +82,6 @@ document.getElementById('yesBtn').addEventListener('click', () => {
   `;
   rainRoses();
 
-  // Event listeners for marriage proposal responses
   document.getElementById('marryYes').addEventListener('click', () => {
     sendResponseEmail("Marry Yes");
     document.querySelector('.marry-response').innerHTML = `
@@ -96,7 +97,6 @@ document.getElementById('yesBtn').addEventListener('click', () => {
   });
 });
 
-// Event listener for "No" button
 document.getElementById('noBtn').addEventListener('click', () => {
   sendResponseEmail("No");
   document.querySelector('.response').innerHTML = `
@@ -105,7 +105,6 @@ document.getElementById('noBtn').addEventListener('click', () => {
   `;
 });
 
-// Function to create the rose animation
 function rainRoses() {
   const roseContainer = document.querySelector('.rose.rain');
   for (let i = 0; i < 30; i++) {
@@ -117,7 +116,7 @@ function rainRoses() {
   }
 }
 
-// CSS Styles Inject (no changes here, keeps styles inline)
+// CSS Styles Inject
 const style = document.createElement('style');
 style.innerHTML = `
   .contact-section {
