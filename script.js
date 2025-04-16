@@ -1,5 +1,3 @@
-// script.js
-
 // Scroll fade-in effect
 const faders = document.querySelectorAll('.fade-in');
 
@@ -10,12 +8,9 @@ const appearOptions = {
 
 const appearOnScroll = new IntersectionObserver(function(entries, observer) {
   entries.forEach(entry => {
-    if (!entry.isIntersecting) {
-      return;
-    } else {
-      entry.target.classList.add('appear');
-      observer.unobserve(entry.target);
-    }
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('appear');
+    observer.unobserve(entry.target);
   });
 }, appearOptions);
 
@@ -48,15 +43,20 @@ questionBox.innerHTML = `
 `;
 document.body.appendChild(questionBox);
 
+// Send Email via EmailJS
 function sendResponseEmail(answer) {
-  emailjs.send("Luwangamba0017", "Luwangamba0017", {
+  emailjs.send("service_2sqdytr", "Luwangamba0017", {
     to_name: "Luwangamba",
     from_name: "Shileibi",
     message: `She clicked: ${answer}`,
     reply_to: "luwangambawahengbam2006@gmail.com"
-  }, "luwang0017");
+  }).then(
+    () => console.log("Email sent: " + answer),
+    error => console.error("Email failed: ", error)
+  );
 }
 
+// Response logic
 document.getElementById('yesBtn').addEventListener('click', () => {
   sendResponseEmail("Yes");
   document.querySelector('.response').innerHTML = `
@@ -76,16 +76,12 @@ document.getElementById('yesBtn').addEventListener('click', () => {
 
   document.getElementById('marryYes').addEventListener('click', () => {
     sendResponseEmail("Marry Yes");
-    document.querySelector('.marry-response').innerHTML = `
-      <h3>💖 Yayy! I'm the happiest person ever!</h3>
-    `;
+    document.querySelector('.marry-response').innerHTML = `<h3>💖 Yayy! I'm the happiest person ever!</h3>`;
   });
 
   document.getElementById('marryNo').addEventListener('click', () => {
     sendResponseEmail("Marry No");
-    document.querySelector('.marry-response').innerHTML = `
-      <h3>😢 I understand... but I'll always love you!</h3>
-    `;
+    document.querySelector('.marry-response').innerHTML = `<h3>😢 I understand... but I'll always love you!</h3>`;
   });
 });
 
@@ -108,9 +104,10 @@ function rainRoses() {
   }
 }
 
-// CSS Styles Inject
+// CSS Style Inject
 const style = document.createElement('style');
 style.innerHTML = `
+
   .contact-section {
     background: linear-gradient(135deg, #ffe4f7, #c6f1ff);
     text-align: center;
@@ -181,9 +178,9 @@ style.innerHTML = `
     box-shadow: 0 0 25px rgba(255, 182, 193, 0.4);
     margin-top: 20px;
   }
-    .proposal-card h1 {
+  .proposal-card h1 {
     color: #e91e63;
-    }
+  }
   .rose {
     width: 25px;
     height: 25px;
@@ -202,10 +199,10 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
-// EmailJS SDK Load
+// Load EmailJS SDK
 const emailjsScript = document.createElement('script');
 emailjsScript.src = 'https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js';
 emailjsScript.onload = () => {
-  emailjs.init("luwang0017"); // Replace with your actual user ID from EmailJS
+  emailjs.init("Luwangamba"); // Your EmailJS User ID
 };
 document.body.appendChild(emailjsScript);
