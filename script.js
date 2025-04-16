@@ -43,20 +43,17 @@ questionBox.innerHTML = `
 `;
 document.body.appendChild(questionBox);
 
-// Send Email via EmailJS
+// Send Email using EmailJS
 function sendResponseEmail(answer) {
-  emailjs.send("service_2sqdytr", "Luwangamba0017", {
+  emailjs.send("service_2sqdytr", "template_ukecxrm", {
     to_name: "Luwangamba",
     from_name: "Shileibi",
     message: `She clicked: ${answer}`,
     reply_to: "luwangambawahengbam2006@gmail.com"
-  }).then(
-    () => console.log("Email sent: " + answer),
-    error => console.error("Email failed: ", error)
-  );
+  }, "Luwangamba");
 }
 
-// Response logic
+// Yes button
 document.getElementById('yesBtn').addEventListener('click', () => {
   sendResponseEmail("Yes");
   document.querySelector('.response').innerHTML = `
@@ -76,15 +73,20 @@ document.getElementById('yesBtn').addEventListener('click', () => {
 
   document.getElementById('marryYes').addEventListener('click', () => {
     sendResponseEmail("Marry Yes");
-    document.querySelector('.marry-response').innerHTML = `<h3>💖 Yayy! I'm the happiest person ever!</h3>`;
+    document.querySelector('.marry-response').innerHTML = `
+      <h3>💖 Yayy! I'm the happiest person ever!</h3>
+    `;
   });
 
   document.getElementById('marryNo').addEventListener('click', () => {
     sendResponseEmail("Marry No");
-    document.querySelector('.marry-response').innerHTML = `<h3>😢 I understand... but I'll always love you!</h3>`;
+    document.querySelector('.marry-response').innerHTML = `
+      <h3>😢 I understand... but I'll always love you!</h3>
+    `;
   });
 });
 
+// No button
 document.getElementById('noBtn').addEventListener('click', () => {
   sendResponseEmail("No");
   document.querySelector('.response').innerHTML = `
@@ -93,6 +95,7 @@ document.getElementById('noBtn').addEventListener('click', () => {
   `;
 });
 
+// Rose animation
 function rainRoses() {
   const roseContainer = document.querySelector('.rose.rain');
   for (let i = 0; i < 30; i++) {
@@ -104,10 +107,9 @@ function rainRoses() {
   }
 }
 
-// CSS Style Inject
+// Inject CSS styles
 const style = document.createElement('style');
 style.innerHTML = `
-
   .contact-section {
     background: linear-gradient(135deg, #ffe4f7, #c6f1ff);
     text-align: center;
@@ -199,10 +201,10 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
-// Load EmailJS SDK
+// Load EmailJS SDK and init
 const emailjsScript = document.createElement('script');
 emailjsScript.src = 'https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js';
 emailjsScript.onload = () => {
-  emailjs.init("Luwangamba"); // Your EmailJS User ID
+  emailjs.init("Luwangamba"); // Your public user key
 };
 document.body.appendChild(emailjsScript);
