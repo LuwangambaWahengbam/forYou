@@ -42,20 +42,23 @@ questionBox.innerHTML = `
 `;
 document.body.appendChild(questionBox);
 
-// Email sending function using EmailJS
+// Send Email with Template Variables
 function sendResponseEmail(answer) {
-  emailjs.send("service_2sqdytr", "template_ukecxrm", {
+  const templateParams = {
     name: "Shileibi",
     message: `She clicked: ${answer}`,
     time: new Date().toLocaleString()
-  }, "Luwangamba").then(() => {
-    console.log("Email sent successfully!");
-  }).catch((error) => {
-    console.error("Failed to send email:", error);
-  });
+  };
+
+  emailjs.send("luwang0017", "template_ukecxrm", templateParams, "Luwangamba")
+    .then(() => {
+      console.log("Email sent ✅");
+    }).catch((error) => {
+      console.error("Email failed ❌", error);
+    });
 }
 
-// Yes button logic
+// Button Click Handlers
 document.getElementById('yesBtn').addEventListener('click', () => {
   sendResponseEmail("Yes");
   document.querySelector('.response').innerHTML = `
@@ -75,20 +78,15 @@ document.getElementById('yesBtn').addEventListener('click', () => {
 
   document.getElementById('marryYes').addEventListener('click', () => {
     sendResponseEmail("Marry Yes");
-    document.querySelector('.marry-response').innerHTML = `
-      <h3>💖 Yayy! I'm the happiest person ever!</h3>
-    `;
+    document.querySelector('.marry-response').innerHTML = `<h3>💖 Yayy! I'm the happiest person ever!</h3>`;
   });
 
   document.getElementById('marryNo').addEventListener('click', () => {
     sendResponseEmail("Marry No");
-    document.querySelector('.marry-response').innerHTML = `
-      <h3>😢 I understand... but I'll always love you!</h3>
-    `;
+    document.querySelector('.marry-response').innerHTML = `<h3>😢 I understand... but I'll always love you!</h3>`;
   });
 });
 
-// No button logic
 document.getElementById('noBtn').addEventListener('click', () => {
   sendResponseEmail("No");
   document.querySelector('.response').innerHTML = `
@@ -97,7 +95,7 @@ document.getElementById('noBtn').addEventListener('click', () => {
   `;
 });
 
-// Rose rain animation
+// Rose Rain
 function rainRoses() {
   const roseContainer = document.querySelector('.rose.rain');
   for (let i = 0; i < 30; i++) {
@@ -109,104 +107,10 @@ function rainRoses() {
   }
 }
 
-// CSS Injection
-const style = document.createElement('style');
-style.innerHTML = `
-  .contact-section {
-    background: linear-gradient(135deg, #ffe4f7, #c6f1ff);
-    text-align: center;
-    padding: 40px 20px;
-    border-radius: 20px;
-    margin: 40px auto;
-    max-width: 90%;
-    box-shadow: 0 0 15px rgba(255, 0, 200, 0.3);
-  }
-  .contact-section h2 {
-    font-family: 'Fleur De Leah', cursive;
-    color: #ff1493;
-    margin-bottom: 20px;
-  }
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  .fb-btn {
-    background-color: #1877f2;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s;
-  }
-  .fb-btn:hover {
-    background-color: #145dbf;
-  }
-  .question-section {
-    background: #fff0f5;
-    padding: 30px;
-    text-align: center;
-    border-radius: 20px;
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
-    margin: 40px auto;
-    max-width: 90%;
-  }
-  .question-section h2 {
-    color: #e91e63;
-    font-family: 'Fleur De Leah', cursive;
-  }
-  .buttons button {
-    background: #ff69b4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  .buttons button:hover {
-    background: #c2185b;
-  }
-  .response h3, .response p, .marry-response h3 {
-    color: #e91e63;
-    font-size: 20px;
-    margin: 10px;
-  }
-  .proposal-card {
-    background: #fff8f0;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255, 182, 193, 0.4);
-    margin-top: 20px;
-  }
-  .proposal-card h1 {
-    color: #e91e63;
-  }
-  .rose {
-    width: 25px;
-    height: 25px;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/415/415733.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: -50px;
-    animation: fall 5s linear infinite;
-  }
-  @keyframes fall {
-    to {
-      transform: translateY(100vh);
-    }
-  }
-`;
-document.head.appendChild(style);
-
 // Load EmailJS SDK
 const emailjsScript = document.createElement('script');
 emailjsScript.src = 'https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js';
 emailjsScript.onload = () => {
-  emailjs.init("Luwangamba");
+  emailjs.init("Luwangamba"); // your user/public key
 };
 document.body.appendChild(emailjsScript);
