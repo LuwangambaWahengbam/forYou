@@ -1,6 +1,5 @@
 // Scroll fade-in effect
 const faders = document.querySelectorAll('.fade-in');
-
 const appearOptions = {
   threshold: 0,
   rootMargin: '0px 0px -100px 0px'
@@ -43,17 +42,20 @@ questionBox.innerHTML = `
 `;
 document.body.appendChild(questionBox);
 
-// Send Email using EmailJS
+// Email sending function using EmailJS
 function sendResponseEmail(answer) {
   emailjs.send("service_2sqdytr", "template_ukecxrm", {
-    to_name: "Luwangamba",
-    from_name: "Shileibi",
+    name: "Shileibi",
     message: `She clicked: ${answer}`,
-    reply_to: "luwangambawahengbam2006@gmail.com"
-  }, "Luwangamba");
+    time: new Date().toLocaleString()
+  }, "Luwangamba").then(() => {
+    console.log("Email sent successfully!");
+  }).catch((error) => {
+    console.error("Failed to send email:", error);
+  });
 }
 
-// Yes button
+// Yes button logic
 document.getElementById('yesBtn').addEventListener('click', () => {
   sendResponseEmail("Yes");
   document.querySelector('.response').innerHTML = `
@@ -86,7 +88,7 @@ document.getElementById('yesBtn').addEventListener('click', () => {
   });
 });
 
-// No button
+// No button logic
 document.getElementById('noBtn').addEventListener('click', () => {
   sendResponseEmail("No");
   document.querySelector('.response').innerHTML = `
@@ -95,7 +97,7 @@ document.getElementById('noBtn').addEventListener('click', () => {
   `;
 });
 
-// Rose animation
+// Rose rain animation
 function rainRoses() {
   const roseContainer = document.querySelector('.rose.rain');
   for (let i = 0; i < 30; i++) {
@@ -107,7 +109,7 @@ function rainRoses() {
   }
 }
 
-// Inject CSS styles
+// CSS Injection
 const style = document.createElement('style');
 style.innerHTML = `
   .contact-section {
@@ -201,10 +203,10 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
-// Load EmailJS SDK and init
+// Load EmailJS SDK
 const emailjsScript = document.createElement('script');
 emailjsScript.src = 'https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js';
 emailjsScript.onload = () => {
-  emailjs.init("Luwangamba"); // Your public user key
+  emailjs.init("Luwangamba");
 };
 document.body.appendChild(emailjsScript);
